@@ -9,17 +9,24 @@ import {CardDeck} from '../shared/card.model';
     styleUrls: ['./card-deck.page.scss']
 })
 export class CardDeckPage {
+    private readonly ALLOWED_DECKS = ['classes', 'factions', 'qualities', 'types', 'races'];
+
+    public cardDecks: CardDeck[] = [];
+
     constructor(private cardService: CardService) {
         this.getCardDecks();
     }
 
-    public cardDecks: CardDeck[] = [];
-
     private getCardDecks() {
         this.cardService.getAllCardDecks().subscribe(
             (cardDecks: CardDeck[]) => {
-                this.cardDecks = cardDecks;
+                this.extractAllowedDecks(cardDecks);
+                // this.cardDecks = cardDecks;
             }
         );
+    }
+
+    extractAllowedDecks(cardDecks: CardDeck[]) {
+        this.ALLOWED_DECKS.forEach((deckName: string) => this.cardDecks.push({name: deckName, types: cardDecks[deckName]}));
     }
 }
