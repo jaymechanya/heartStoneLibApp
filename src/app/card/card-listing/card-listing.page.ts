@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-card-listing',
   templateUrl: './card-listing.page.html',
   styleUrls: ['./card-listing.page.scss'],
 })
-export class CardListingPage implements OnInit {
+export class CardListingPage {
 
-  constructor() { }
+  cardDeckGroup: string;
+  cardDeck: string;
 
-  ngOnInit() {
+  constructor(private route: ActivatedRoute) { }
+
+  ionViewWillEnter() {
+    this.cardDeckGroup = this.route.snapshot.paramMap.get('cardDeckGroup');
+    this.cardDeck = this.route.snapshot.paramMap.get('cardDeck');
   }
 
 }

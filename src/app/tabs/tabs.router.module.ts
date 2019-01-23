@@ -23,12 +23,12 @@ const routes: Routes = [
         component: ContactPage
       },
       {
-        path: 'card-deck',
+        path: 'card',
         outlet: 'card',
         component: CardDeckPage
       },
       {
-        path: 'card-listing',
+        path: 'card/:cardDeckGroup/:cardDeck',
         outlet: 'card',
         component: CardListingPage
       }
@@ -36,7 +36,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tabs/(card:card-deck)',
+    redirectTo: '/tabs/(card:card)',
     pathMatch: 'full'
   }
 ];
