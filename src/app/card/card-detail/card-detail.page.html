@@ -1,18 +1,21 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>{{card?.name}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
   <div *ngIf="card && card.cardId">
-    <ion-card>
+    <ion-card class="ion-card">
       <img alt="card-image" [src]="card.img" (error)="updateImage($event)">
       <ion-card-content>
-        <ion-card-title>{{card?.name}}</ion-card-title>
+        <ion-card-title class="card-title-header">{{card?.name}}</ion-card-title>
         <p [innerHTML]="card?.text"></p>
         <p>{{card?.flavor}}</p>
-        <ion-card-subtitle>Statistics</ion-card-subtitle>
+        <span class="card-stats-header">Statistics</span>
         <p *ngIf="card.health"><b>Health: </b>{{card?.health}}</p>
         <p *ngIf="card.attack"><b>Attack: </b>{{card?.attack}}</p>
         <p *ngIf="card.faction"><b>Faction: </b>{{card?.faction}}</p>

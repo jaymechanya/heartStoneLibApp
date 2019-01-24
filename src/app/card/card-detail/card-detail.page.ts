@@ -17,6 +17,7 @@ export class CardDetailPage {
 
   ionViewWillEnter() {
     const cardId = this.route.snapshot.paramMap.get('cardId');
+
     this.cardService.getCardbyId(cardId).subscribe(
         (card: Card[]) => {
           this.card = card.map((card: Card) => {

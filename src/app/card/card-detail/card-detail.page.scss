@@ -1,0 +1,26 @@
+// Styling card-detail page ..............................
+
+.card-title-header {
+  font-weight: 500;
+  //font-family: 'Patua One', cursive;
+  //font-weight: normal;
+  //color: #3d2607; // Dark Brown
+  color: black;
+  padding-bottom: 5px;
+}
+
+.card-stats-header {
+  font-size: 17px;
+  font-weight: 500;
+  padding: 10px 0 5px;
+  display: block;
+  //color: #2353a9; // Dark Blue
+  //color: #6f4c1c; // Light brown
+  color: #488aff;
+}
+
+// Layout ..............................
+.ion-card {
+  width: 92%;
+  margin: 8px auto 0;
+}
