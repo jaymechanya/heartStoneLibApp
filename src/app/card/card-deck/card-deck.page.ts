@@ -21,7 +21,6 @@ export class CardDeckPage {
         this.cardService.getAllCardDecks().subscribe(
             (cardDecks: CardDeck[]) => {
                 this.extractAllowedDecks(cardDecks);
-                // this.cardDecks = cardDecks;
             }
         );
     }
