@@ -6,6 +6,7 @@ import { AboutPage } from '../about/about.page';
 import { ContactPage } from '../contact/contact.page';
 import {CardDeckPage} from '../card/card-deck/card-deck.page';
 import {CardListingPage} from '../card/card-listing/card-listing.page';
+import {CardDetailPage} from '../card/card-detail/card-detail.page';
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
         path: 'card/:cardDeckGroup/:cardDeck',
         outlet: 'card',
         component: CardListingPage
+      },
+      {
+        path: 'card/:cardId',
+        outlet: 'card',
+        component: CardDetailPage
       }
     ]
   },

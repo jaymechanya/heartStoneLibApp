@@ -4,32 +4,30 @@ import {CardService} from '../shared/card.service';
 import {Card} from '../shared/card.model';
 
 @Component({
-  selector: 'app-card-listing',
-  templateUrl: './card-listing.page.html',
-  styleUrls: ['./card-listing.page.scss'],
+  selector: 'app-card-detail',
+  templateUrl: './card-detail.page.html',
+  styleUrls: ['./card-detail.page.scss'],
 })
-export class CardListingPage {
+export class CardDetailPage {
 
-  cardDeckGroup: string;
-  cardDeck: string;
-
-  cards: Card[] = [];
+  card: Card;
 
   constructor(private route: ActivatedRoute,
               private cardService: CardService) {}
 
   ionViewWillEnter() {
-    this.cardDeckGroup = this.route.snapshot.paramMap.get('cardDeckGroup');
-    this.cardDeck = this.route.snapshot.paramMap.get('cardDeck');
-
-    this.cardService.getCardsByDeck(this.cardDeckGroup, this.cardDeck).subscribe(
-        (cards: Card[]) => {
-          this.cards = cards.map((card: Card) => {
+    const cardId = this.route.snapshot.paramMap.get('cardId');
+    this.cardService.getCardbyId(cardId).subscribe(
+        (card: Card[]) => {
+          this.card = card.map((card: Card) => {
             // card.text = card.text ? card.text.replace(new RegExp("\\\\n", "g"), ", ") : 'No Description';
             card.text = this.cardService.replaceCardTextLine(card.text);
             return card;
-          });
+          })[0];
         });
   }
 
+  updateImage() {
+    this.card.img = 'assets/image/DefaultCard.png';
+  }
 }

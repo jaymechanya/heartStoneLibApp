@@ -5,5 +5,28 @@
 </ion-header>
 
 <ion-content padding>
-  <h1>{{cardDeck}}</h1>
+  <ion-list *ngIf="cards.length > 0">
+
+    <ion-card *ngFor="let card of cards">
+      <ion-card-header text-wrap>
+        <ion-card-subtitle>{{card.cardSet}}</ion-card-subtitle>
+        <ion-card-title>{{card.name}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div [innerHTML]="card.text"></div>
+        <ion-button [href]="'/tabs(card:card/' + card.cardId +')'" size="medium" expand="full">See details</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <!--<ion-list-header>-->
+      <!--<ion-label>{{card.name}}</ion-label>-->
+    <!--</ion-list-header>-->
+    <!--<ion-item *ngFor="let card of cards">-->
+      <!--<ion-label>-->
+        <!--<h2>{{card.cardSet}}</h2>-->
+        <!--<app-card-list></app-card-list>-->
+      <!--</ion-label>-->
+    <!--</ion-item>-->
+
+  </ion-list>
 </ion-content>

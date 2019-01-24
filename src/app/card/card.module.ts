@@ -8,6 +8,7 @@ import {CardService} from './shared/card.service';
 import {CardDeckPage} from './card-deck/card-deck.page';
 import {CardListComponent} from './components/card-list.component';
 import {CardListingPage} from './card-listing/card-listing.page';
+import {CardDetailPage} from './card-detail/card-detail.page';
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import {CardListingPage} from './card-listing/card-listing.page';
     declarations: [
         CardDeckPage,
         CardListComponent,
-        CardListingPage
+        CardListingPage,
+        CardDetailPage
     ]
 })
 export class CardPageModule {}
