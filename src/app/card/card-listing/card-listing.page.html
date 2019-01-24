@@ -14,19 +14,9 @@
       </ion-card-header>
       <ion-card-content>
         <div [innerHTML]="card.text"></div>
-        <ion-button [href]="'/tabs(card:card/' + card.cardId +')'" size="medium" expand="full">See details</ion-button>
+        <ion-button [href]="'/tabs/(card:card/' + card.cardId + ')'" size="medium" expand="full">See details</ion-button>
       </ion-card-content>
     </ion-card>
-
-    <!--<ion-list-header>-->
-      <!--<ion-label>{{card.name}}</ion-label>-->
-    <!--</ion-list-header>-->
-    <!--<ion-item *ngFor="let card of cards">-->
-      <!--<ion-label>-->
-        <!--<h2>{{card.cardSet}}</h2>-->
-        <!--<app-card-list></app-card-list>-->
-      <!--</ion-label>-->
-    <!--</ion-item>-->
 
   </ion-list>
 </ion-content>

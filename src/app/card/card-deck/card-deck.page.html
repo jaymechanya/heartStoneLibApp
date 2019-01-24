@@ -7,10 +7,9 @@
 </ion-header>
 
 <ion-content>
-    <app-card-list
-            *ngFor="let cardDeck of cardDecks"
-            [items]="cardDeck.types"
-            [listName]="cardDeck.name"
-            [navigateTo]="generateUrl">
+    <app-card-list  *ngFor="let cardDeck of cardDecks"
+                    [items]="cardDeck.types"
+                    [listName]="cardDeck.name"
+                    [navigateTo]="generateUrl">
     </app-card-list>
 </ion-content>
