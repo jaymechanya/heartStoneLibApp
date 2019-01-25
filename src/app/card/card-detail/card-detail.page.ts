@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {CardService} from '../shared/card.service';
 import {Card} from '../shared/card.model';
-import {LoadingController} from '@ionic/angular';
+import {LoaderService} from '../../shared/service/loader.service';
 
 @Component({
   selector: 'app-card-detail',
@@ -12,25 +12,18 @@ import {LoadingController} from '@ionic/angular';
 export class CardDetailPage {
 
   card: Card;
-  loader: any;
 
-  constructor(private route: ActivatedRoute,
-              private cardService: CardService,
-              private loadingCtrl: LoadingController) {}
+  constructor(
+      private route: ActivatedRoute,
+      private cardService: CardService,
+      private loaderService: LoaderService
+  ) {}
 
-  private async presentLoading() {
-    const loader = await this.loadingCtrl.create({
-      content: 'Loading..',
-      translucent: true
-    });
-    loader.present();
-    return loader;
-  }
-
-  async ionViewWillEnter() {
+  ionViewWillEnter() {
     const cardId = this.route.snapshot.paramMap.get('cardId');
 
-    this.loader = await this.presentLoading();
+    // this.loader = await this.presentLoading();
+    this.loaderService.presentLoading();
 
     this.cardService.getCardbyId(cardId).subscribe(
         (card: Card[]) => {
@@ -39,7 +32,9 @@ export class CardDetailPage {
             // card.text = card.text ? card.text.replace(new RegExp("\\\\n", "g"), ", ") : 'No Description';
             return card;
           })[0];
-          this.loader.dismiss();
+
+          // this.loader.dismiss();
+          this.loaderService.dismissLoading();
         });
   }
 
