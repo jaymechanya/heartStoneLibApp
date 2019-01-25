@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {CardService} from '../shared/card.service';
 import {Card} from '../shared/card.model';
 import {LoaderService} from '../../shared/service/loader.service';
+import {ToastService} from '../../shared/service/toast.service';
 
 @Component({
   selector: 'app-card-listing',
@@ -18,7 +19,8 @@ export class CardListingPage {
   constructor(
       private route: ActivatedRoute,
       private cardService: CardService,
-      private loaderService: LoaderService
+      private loaderService: LoaderService,
+      private toaster: ToastService
   ) {}
 
   ionViewWillEnter() {
@@ -35,10 +37,12 @@ export class CardListingPage {
             // card.text = card.text ? card.text.replace(new RegExp("\\\\n", "g"), ", ") : 'No Description';
             return card;
       });
-
       // this.loader.dismiss();
       this.loaderService.dismissLoading();
-    });
+    }, () => {
+        this.loaderService.dismissLoading();
+        this.toaster.presentErrorToast('Sorry, cards could not be loaded. Please try to refresh a page.');
+      });
   }
 
 }

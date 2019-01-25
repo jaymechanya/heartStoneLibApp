@@ -10,3 +10,14 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+
+// Add toast error style from toast-service-ts
+.toast-error {
+  > div {
+    background-color: #f53d3d !important;
+  }
+
+  .toast-message {
+    color: white !important;
+  }
+}
