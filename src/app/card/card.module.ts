@@ -12,6 +12,7 @@ import {CardDetailPage} from './card-detail/card-detail.page';
 import {LoaderService} from '../shared/service/loader.service';
 import {ToastService} from '../shared/service/toast.service';
 import {AlertService} from '../shared/service/alert.service';
+import {SearchComponent} from '../shared/component/search/search.component';
 
 @NgModule({
     imports: [
@@ -29,7 +30,8 @@ import {AlertService} from '../shared/service/alert.service';
         CardDeckPage,
         CardListComponent,
         CardListingPage,
-        CardDetailPage
+        CardDetailPage,
+        SearchComponent
     ]
 })
 export class CardPageModule {}
