@@ -23,26 +23,28 @@ export class CardListingPage {
       private toaster: ToastService
   ) {}
 
+  private getCards() {
+    this.loaderService.presentLoading();
+
+    this.cardService.getCardsByDeck(this.cardDeckGroup, this.cardDeck).subscribe(
+        (cards: Card[]) => {
+            this.cards = cards.map((card: Card) => {
+                card.text = this.cardService.replaceCardTextLine(card.text);
+                return card;
+            });
+            this.loaderService.dismissLoading();
+        }, () => {
+            this.loaderService.dismissLoading();
+            this.toaster.presentErrorToast('Sorry, cards could not be loaded. Please try to refresh a page.');
+        }
+    );
+  }
+
   ionViewWillEnter() {
     this.cardDeckGroup = this.route.snapshot.paramMap.get('cardDeckGroup');
     this.cardDeck = this.route.snapshot.paramMap.get('cardDeck');
 
-    // this.loader = await this.presentLoading();
-    this.loaderService.presentLoading();
-
-    this.cardService.getCardsByDeck(this.cardDeckGroup, this.cardDeck).subscribe(
-    (cards: Card[]) => {
-      this.cards = cards.map((card: Card) => {
-            card.text = this.cardService.replaceCardTextLine(card.text);
-            // card.text = card.text ? card.text.replace(new RegExp("\\\\n", "g"), ", ") : 'No Description';
-            return card;
-      });
-      // this.loader.dismiss();
-      this.loaderService.dismissLoading();
-    }, () => {
-        this.loaderService.dismissLoading();
-        this.toaster.presentErrorToast('Sorry, cards could not be loaded. Please try to refresh a page.');
-      });
+    if (this.cards && this.cards.length === 0) this.getCards();
   }
 
 }
