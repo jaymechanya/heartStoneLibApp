@@ -10,9 +10,11 @@
 <ion-content padding>
 
   <app-search (searchCompleted)="hydrateCards($event)"
+              (searchLoader)="handleSearch()"
               [items]="copyOfCards"
               [filteredProperty]="'name'">
   </app-search>
+  <ion-spinner text-center *ngIf="isLoading"></ion-spinner>
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>

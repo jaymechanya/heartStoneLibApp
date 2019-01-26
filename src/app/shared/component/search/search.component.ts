@@ -12,15 +12,17 @@ export class SearchComponent {
     @Input() filteredProperty: string;
 
     @Output() searchCompleted = new EventEmitter();
+    @Output() searchLoader = new EventEmitter();
 
     private searchSubject = new BehaviorSubject<string>('');
 
     handleSearch(event: any) {
+      this.searchLoader.emit();
       this.searchSubject.next(event.target.value);
     }
 
     ngAfterViewInit() {
-      this.searchSubject.pipe(debounceTime(200), distinctUntilChanged()).subscribe(searchedText => {
+      this.searchSubject.pipe(debounceTime(450), distinctUntilChanged()).subscribe(searchedText => {
 
         if (!this.items) return this.searchCompleted.emit([]);
         if (!searchedText) return this.searchCompleted.emit(this.items);
