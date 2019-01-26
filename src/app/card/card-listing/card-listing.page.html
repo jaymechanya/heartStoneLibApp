@@ -21,16 +21,26 @@
   </ion-refresher>
 
   <ion-list *ngIf="cards.length > 0" class="card-container">
+
     <ion-card *ngFor="let card of cards" class="ion-card">
+
       <ion-card-header text-wrap class="card-header-block">
-        <ion-card-subtitle class="card-subtitle">{{card.cardSet}}</ion-card-subtitle>
-        <ion-card-title class="card-title-header">{{card.name}}</ion-card-title>
+        <ion-card-subtitle class="card-subtitle">
+          {{card.cardSet}}
+          <ion-icon (click)="favoriteCard(card)" [ngClass]="card.favorite ? 'favorite': 'normal'" name="flame" class="favorite-icon"></ion-icon>
+        </ion-card-subtitle>
+        <ion-card-title class="card-title-header">
+          {{card.name}}
+        </ion-card-title>
       </ion-card-header>
+
       <ion-card-content class="card-content-block">
         <div [innerHTML]="card.text" class="paragraph"></div>
         <ion-button [href]="'/tabs/(card:card/' + card.cardId + ')'" size="default" expand="block">Show detail</ion-button>
       </ion-card-content>
+
     </ion-card>
+
   </ion-list>
 
 </ion-content>

@@ -34,3 +34,13 @@
 ion-spinner {
   width: 100%;
 }
+
+.favorite-icon {
+  float: right;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.favorite {
+  color: var(--ion-color-danger-shade);
+}

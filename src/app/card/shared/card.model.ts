@@ -6,6 +6,7 @@ export interface CardDeck {
 export interface Card {
     cardId: string;
     cardSet: string;
+    favorite: boolean;
     name: string;
     text: string;
     img: string;
