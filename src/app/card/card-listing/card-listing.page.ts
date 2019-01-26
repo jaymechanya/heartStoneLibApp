@@ -47,4 +47,8 @@ export class CardListingPage {
     if (this.cards && this.cards.length === 0) this.getCards();
   }
 
+    doRefresh(event) {
+        this.getCards();
+        event.target.complete();
+    }
 }
