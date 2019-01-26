@@ -35,7 +35,7 @@ export class CardListingPage {
             this.loaderService.dismissLoading();
         }, () => {
             this.loaderService.dismissLoading();
-            this.toaster.presentErrorToast('Sorry, cards could not be loaded. Please try to refresh a page.');
+            this.toaster.presentErrorToast('Sorry, cards could not be loaded. Please try to refresh the page.');
         }
     );
   }
