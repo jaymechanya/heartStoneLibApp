@@ -4,6 +4,7 @@ import {CardService} from '../shared/card.service';
 import {Card} from '../shared/card.model';
 import {LoaderService} from '../../shared/service/loader.service';
 import {ToastService} from '../../shared/service/toast.service';
+import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'app-card-listing',
@@ -17,14 +18,21 @@ export class CardListingPage {
   cards: Card[] = [];
   copyOfCards: Card[] = [];
 
+  favouriteCards: any = {};
+
   isLoading: boolean = false;
 
   constructor(
       private route: ActivatedRoute,
       private cardService: CardService,
       private loaderService: LoaderService,
-      private toaster: ToastService
-  ) {}
+      private toaster: ToastService,
+      private storage: Storage
+  ) {
+      this.storage.get('favoriteCards').then((favoriteCards) => {
+          this.favouriteCards = favoriteCards || {};
+      });
+  }
 
   private getCards() {
     this.loaderService.presentLoading();
@@ -33,6 +41,7 @@ export class CardListingPage {
         (cards: Card[]) => {
             this.cards = cards.map((card: Card) => {
                 card.text = this.cardService.replaceCardTextLine(card.text);
+                card.favorite = this.isCardFavorite(card.cardId);
                 return card;
             });
             this.copyOfCards = Array.from(this.cards);
@@ -42,6 +51,11 @@ export class CardListingPage {
             this.toaster.presentErrorToast('Sorry, cards could not be loaded. Please try to refresh the page.');
         }
     );
+  }
+
+  private isCardFavorite(cardId: string): boolean {
+      const card = this.favouriteCards[cardId];
+      return card ? true : false;
   }
 
   ionViewWillEnter() {
@@ -68,8 +82,11 @@ export class CardListingPage {
     favoriteCard(card: Card) {
         if (card.favorite) {
             card.favorite = false;
+            delete this.favouriteCards[card.cardId];
         } else {
             card.favorite = true;
+            this.favouriteCards[card.cardId] = card;
         }
+        this.storage.set('favoriteCards', this.favouriteCards).then(() => {});
     }
 }
