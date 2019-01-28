@@ -7,6 +7,7 @@ import { ContactPage } from '../contact/contact.page';
 import {CardDeckPage} from '../card/card-deck/card-deck.page';
 import {CardListingPage} from '../card/card-listing/card-listing.page';
 import {CardDetailPage} from '../card/card-detail/card-detail.page';
+import {CardFavoritePage} from '../card/card-favorite/card-favorite.page';
 
 const routes: Routes = [
   {
@@ -19,9 +20,9 @@ const routes: Routes = [
         component: AboutPage
       },
       {
-        path: 'contact',
-        outlet: 'contact',
-        component: ContactPage
+        path: 'favorite',
+        outlet: 'favorite',
+        component: CardFavoritePage
       },
       {
         path: 'card',

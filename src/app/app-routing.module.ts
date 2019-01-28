@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },  { path: 'card-detail', loadChildren: './card/card-detail/card-detail.module#CardDetailPageModule' },
-
+  { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
+  // { path: 'card-detail', loadChildren: './card/card-detail/card-detail.module#CardDetailPageModule' },
+  // { path: 'card-favorite', loadChildren: './card/card-favorite/card-favorite.module#CardFavoritePageModule' },
   // { path: 'card-listing', loadChildren: './card/card-listing/card-listing.module#CardListingPageModule' }
 
 ];

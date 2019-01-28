@@ -10,7 +10,7 @@
 <ion-content padding>
   <div *ngIf="card && card.cardId">
     <ion-card class="ion-card">
-      <img alt="card-image" [src]="card.img" (error)="updateImage($event)">
+      <img alt="card-image" [src]="card.img" (error)="updateImage($event)" class="default-card-img">
       <ion-card-content>
         <ion-card-title class="card-title-header">{{card?.name}}</ion-card-title>
         <p [innerHTML]="card?.text"></p>
