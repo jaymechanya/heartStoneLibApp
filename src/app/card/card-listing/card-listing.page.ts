@@ -5,6 +5,7 @@ import {Card} from '../shared/card.model';
 import {LoaderService} from '../../shared/service/loader.service';
 import {ToastService} from '../../shared/service/toast.service';
 import {Storage} from '@ionic/storage';
+import {FavoriteCardStore} from '../shared/favorite-card.store';
 
 @Component({
   selector: 'app-card-listing',
@@ -27,10 +28,12 @@ export class CardListingPage {
       private cardService: CardService,
       private loaderService: LoaderService,
       private toaster: ToastService,
-      private storage: Storage
+      private storage: Storage,
+      private favoriteCardStore: FavoriteCardStore
   ) {
-      this.storage.get('favoriteCards').then((favoriteCards) => {
-          this.favouriteCards = favoriteCards || {};
+      this.favoriteCardStore.favoriteCards.subscribe(
+          (favoriteCards: any) => {
+          this.favouriteCards = favoriteCards;
       });
   }
 
@@ -59,34 +62,26 @@ export class CardListingPage {
   }
 
   ionViewWillEnter() {
-    this.cardDeckGroup = this.route.snapshot.paramMap.get('cardDeckGroup');
-    this.cardDeck = this.route.snapshot.paramMap.get('cardDeck');
-
-    if (this.cards && this.cards.length === 0) this.getCards();
+      this.cardDeckGroup = this.route.snapshot.paramMap.get('cardDeckGroup');
+      this.cardDeck = this.route.snapshot.paramMap.get('cardDeck');
+      if (this.cards && this.cards.length === 0) this.getCards();
   }
 
-    doRefresh(event) {
-        this.getCards();
-        event.target.complete();
-    }
+  doRefresh(event) {
+      this.getCards();
+      event.target.complete();
+  }
 
-    hydrateCards(cards: Card[]) {
-        this.cards = cards;
-        this.isLoading = false;
-    }
+  hydrateCards(cards: Card[]) {
+      this.cards = cards;
+      this.isLoading = false;
+  }
 
-    handleSearch() {
-        this.isLoading = true;
-    }
+  handleSearch() {
+      this.isLoading = true;
+  }
 
-    favoriteCard(card: Card) {
-        if (card.favorite) {
-            card.favorite = false;
-            delete this.favouriteCards[card.cardId];
-        } else {
-            card.favorite = true;
-            this.favouriteCards[card.cardId] = card;
-        }
-        this.storage.set('favoriteCards', this.favouriteCards).then(() => {});
-    }
+  favoriteCard(card: Card) {
+      this.favoriteCardStore.toggleCard(card);
+  }
 }

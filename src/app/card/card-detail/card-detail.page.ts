@@ -39,6 +39,6 @@ export class CardDetailPage {
   }
 
   updateImage() {
-    this.card.img = 'assets/image/DefaultCard.png';
+    this.card.img = 'assets/image/DefaultCard_small.jpg';
   }
 }
