@@ -9,6 +9,18 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {IonicStorageModule} from '@ionic/storage';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {Firebase} from '@ionic-native/firebase/ngx';
+
+const config = {
+  apiKey: "AIzaSyCMVmThnonMwjQZLZWV9FlK6GYgVx3Dygo",
+  authDomain: "heartstonelib-ionic-app.firebaseapp.com",
+  databaseURL: "https://heartstonelib-ionic-app.firebaseio.com",
+  projectId: "heartstonelib-ionic-app",
+  storageBucket: "heartstonelib-ionic-app.appspot.com",
+  messagingSenderId: "363106018352"
+};
 
 @NgModule({
   declarations: [
@@ -19,11 +31,14 @@ import {IonicStorageModule} from '@ionic/storage';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+      AngularFireModule.initializeApp(config),
+      AngularFirestoreModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    Firebase,
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
