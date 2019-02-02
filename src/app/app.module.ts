@@ -12,6 +12,7 @@ import {IonicStorageModule} from '@ionic/storage';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {Firebase} from '@ionic-native/firebase/ngx';
+import {FcmService} from './shared/service/fcm.service';
 
 const config = {
   apiKey: "AIzaSyCMVmThnonMwjQZLZWV9FlK6GYgVx3Dygo",
@@ -39,6 +40,7 @@ const config = {
     StatusBar,
     SplashScreen,
     Firebase,
+      FcmService
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
