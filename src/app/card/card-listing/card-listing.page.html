@@ -22,7 +22,7 @@
 
   <ion-list *ngIf="cards.length > 0" class="card-container">
 
-    <ion-card *ngFor="let card of cards" class="ion-card">
+    <ion-card *ngFor="let card of cards | slice:0:limit" class="ion-card">
 
       <ion-card-header text-wrap class="card-header-block">
         <ion-card-subtitle class="card-subtitle">
@@ -42,5 +42,12 @@
     </ion-card>
 
   </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+            loadingSpinner="bubbles"
+            loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>
