@@ -22,20 +22,23 @@ export class CardDetailPage {
   ) {}
 
   ionViewWillEnter() {
-    const cardId = this.route.snapshot.paramMap.get('cardId');
+      this.getCard();
+  }
 
-    this.loaderService.presentLoading();
+  async getCard() {
+      const cardId = this.route.snapshot.paramMap.get('cardId');
+      await this.loaderService.presentLoading();
+      this.cardService.getCardbyId(cardId).subscribe(
+          (card: Card[]) => {
+              this.card = card.map((card: Card) => {
+                  card.text = this.cardService.replaceCardTextLine(card.text);
+                  return card;
+              })[0];
 
-    this.cardService.getCardbyId(cardId).subscribe(
-        (card: Card[]) => {
-          this.card = card.map((card: Card) => {
-            card.text = this.cardService.replaceCardTextLine(card.text);
-            return card;
-          })[0];
-
-          // this.alertService.presentAlert('Connection error, please reload the page.');
-          this.loaderService.dismissLoading();
-        });
+              // this.alertService.presentAlert('Connection error, please reload the page.');
+              this.loaderService.dismissLoading();
+          }
+      );
   }
 
   updateImage() {
